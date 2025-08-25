@@ -3,5 +3,5 @@ WORKDIR /app
 COPY backend/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY backend /app
-EXPOSE 8080
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+ENV PORT=8000
+CMD ["bash", "-lc", "python seed_demo.py || true; uvicorn app:app --host 0.0.0.0 --port ${PORT}"]
